@@ -97,18 +97,7 @@ void loop () {
 
 /*
 ANALYSIS:
-
-The circular buffer effectively decouples the high-speed producer (1000 Hz) from the 
-slow consumer (10 Hz). With 100ms consumer intervals, the consumer processes ~100 items 
-each cycle (since producer generates 100 items in 100ms). The BUFFER_SIZE of 64 is actually 
-insufficient for this scenario because:
-
-- In 100ms, producer generates 100 items
-- Consumer only processes items once every 100ms
-- Buffer needs to hold at least 100 items to prevent overflow
-
-If the consumer is delayed, the buffer will overflow. This demonstrates the importance of:
-1. Proper buffer sizing based on production/consumption rates
-2. Handling overflow conditions gracefully
-3. Monitoring buffer status in real-time systems
+sensor speed: 1000 readings/sec
+without buffer: data loss
+with circular buffer: sensor ---> buffer ---> processor
 */
