@@ -196,18 +196,27 @@ void setup() {
     delete temp;
   }
   
-  /*
-  ANALYSIS:
-  
-  1. For a playlist that rarely changes, array implementation is more memory-efficient
-     because it has no overhead per element (no pointers needed).
-  
-  2. For frequent additions/removals from the middle, linked list is more time-efficient
-     because no shifting of elements is required.
-  
-  3. Risk of linked list on ESP32: Memory fragmentation over time due to frequent
-     new/delete operations can cause allocation failures.
-  */
+/*
+ANALYSIS:
+
+1. Memory Efficiency:
+Array implementation is more memory-efficient for playlists that rarely change.
+Reason:
+- Uses fixed memory
+- No extra pointer per element
+- No heap fragmentation
+
+2. Time Efficiency (Frequent Middle Changes):
+Linked list is more time-efficient when frequently inserting/removing from the middle.
+Reason:
+- No shifting required
+- Only pointer updates
+
+3. Risk of Linked List on ESP32:
+- Uses dynamic memory (new/delete)
+- Causes heap fragmentation over long periods
+- May crash device in long-running systems
+*/
 }
 
 void loop() {
